@@ -1,0 +1,43 @@
+From ef3ff7bde148194a3a7aaf76b394981bdea9d9f3 Mon Sep 17 00:00:00 2001
+From: Ryan M Sullivan <Deffpatch@gmail.com>
+Date: Fri, 7 Feb 2020 08:17:25 -0800
+Subject: [PATCH] Added EWMHTags
+
+---
+ dmenu.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/dmenu.c b/dmenu.c
+index c507c6f..4dda00c 100644
+--- a/dmenu.c
++++ b/dmenu.c
+@@ -50,7 +50,7 @@ static struct item *matches, *matchend;
+ static struct item *prev, *curr, *next, *sel;
+ static int mon = -1, screen;
+ 
+-static Atom clip, utf8;
++static Atom clip, utf8, type, dock;
+ static Display *dpy;
+ static Window root, parentwin, win;
+ static XIC xic;
+@@ -738,6 +738,8 @@ setup(void)
+ 
+ 	clip = XInternAtom(dpy, "CLIPBOARD",   False);
+ 	utf8 = XInternAtom(dpy, "UTF8_STRING", False);
++	type = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
++	dock = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DOCK", False);
+ 
+ 	/* calculate menu geometry */
+ 	bh = drw->fonts->h + 2;
+@@ -796,6 +798,8 @@ setup(void)
+ 	                    depth, InputOutput, visual,
+ 	                    CWOverrideRedirect|CWBackPixel|CWBorderPixel|CWColormap|CWEventMask, &swa);
+ 	XSetClassHint(dpy, win, &ch);
++	XChangeProperty(dpy, win, type, XA_ATOM, 32, PropModeReplace,
++			(unsigned char *) &dock, 1);
+ 
+ 
+ 	/* input methods */
+-- 
+2.25.0
+
