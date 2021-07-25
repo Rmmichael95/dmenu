@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
+
 typedef struct {
 	Cursor cursor;
 } Cur;
@@ -44,7 +45,6 @@ void drw_font_getexts(Fnt *font, const char *text, unsigned int len, unsigned in
 void drw_clr_create(Drw *drw, Clr *dest, const char *clrname, unsigned int alpha);
 Clr *drw_scm_create(Drw *drw, const char *clrnames[], const unsigned int alphas[], size_t clrcount);
 
-
 /* Cursor abstraction */
 Cur *drw_cur_create(Drw *drw, int shape);
 void drw_cur_free(Drw *drw, Cur *cursor);
@@ -59,3 +59,4 @@ int drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned in
 
 /* Map functions */
 void drw_map(Drw *drw, Window win, int x, int y, unsigned int w, unsigned int h);
+
